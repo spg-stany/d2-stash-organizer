@@ -49,9 +49,9 @@ export function Item({
       <th scope="row" aria-label={item.name}>
         <ItemTooltip item={item} />
       </th>
-      <td>
+      {/* <td>
         <AdditionalInfo item={item} quantity={duplicates?.length} />
-      </td>
+      </td> */}
       {withLocation && (
         <td>
           <ItemLocationDesc item={item} />

@@ -35,31 +35,39 @@ export function ItemsTable({ items, pageSize, selectable }: ItemsTableProps) {
           </>
         )}
       />
-      <table id="collection">
-        <thead>
-          <tr class="sidenote">
-            <th>
-              <span class="sr-only">Select</span>
-            </th>
-            <th>Item</th>
-            <th>Characteristics</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {groupedItems
-            .slice(firstItem, firstItem + pageSize)
-            .map((items, index) => (
-              <Item
-                key={items[0].id ?? index}
-                item={items[0]}
-                duplicates={items}
-                selectable={selectable}
-                withLocation={true}
-              />
-            ))}
-        </tbody>
-      </table>
+      <div class="body">
+        <table id="collection">
+          <thead>
+            <tr class="sidenote">
+              <th>
+                <span class="sr-only">Select</span>
+              </th>
+              <th>Item</th>
+              <th>Characteristics</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupedItems
+              .slice(firstItem, firstItem + pageSize)
+              .map((items, index) => (
+                <Item
+                  key={items[0].id ?? index}
+                  item={items[0]}
+                  duplicates={items}
+                  selectable={selectable}
+                  withLocation={true}
+                />
+              ))}
+          </tbody>
+        </table>
+        <div>
+          <span>
+            Test2
+            Pestilent Grand Charm of Inertia
+          </span>
+        </div>
+      </div>
     </>
   );
 }

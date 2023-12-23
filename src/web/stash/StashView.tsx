@@ -4,6 +4,9 @@ import { useContext, useEffect, useMemo, useState } from "preact/hooks";
 import { pageName } from "./utils/pageName";
 import { CollectionContext } from "../store/CollectionContext";
 import { Search, searchItems } from "../controls/Search";
+import { SelectionContext } from "../transfer/SelectionContext";
+import { colorClass } from "../collection/utils/colorClass";
+import { getBase } from "../../scripts/items/getBase";
 import "../controls/Controls.css";
 import {
   filterItemsByQuality,
@@ -17,6 +20,7 @@ import {
 } from "../../scripts/save-file/ownership";
 import { characterPages } from "./characterPages";
 import { SelectAll } from "../controls/SelectAll";
+import ItemEditor from "../items/ItemEditor";
 
 const PAGE_SIZE = 10;
 
@@ -82,6 +86,9 @@ export function StashView() {
     />
   );
 
+  const { selectedItems } = useContext(SelectionContext);
+  const item = useMemo(() => Array.from(selectedItems), [selectedItems])[0];
+
   return (
     <>
       <div class="controls">
@@ -111,12 +118,17 @@ export function StashView() {
       </div>
       {pagination}
       {/* Need an extra div because Preact doesn't seem to like maps flat with non-mapped elements */}
-      <div>
-        {filteredPages
-          .slice(currentPage, currentPage + PAGE_SIZE)
-          .map((page, index) => (
-            <Page key={index} page={page} index={index + currentPage} />
-          ))}
+      <div class="body">
+        <div class="table">
+          {filteredPages
+            .slice(currentPage, currentPage + PAGE_SIZE)
+            .map((page, index) => (
+              <Page key={index} page={page} index={index + currentPage} />
+            ))}
+        </div>
+
+        <ItemEditor item={item} />
+
       </div>
       {pagination}
     </>
