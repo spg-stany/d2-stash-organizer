@@ -24,3 +24,9 @@
 #collection tbody tr:hover td:not(:first-child) {
   color: #6fb76f;
 }
+
+.body {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 2em;
+}
